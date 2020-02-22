@@ -16,6 +16,7 @@ import Navbar from "../components/Navbar";
 import Pagination from "@material-ui/lab/Pagination";
 import Select from "@material-ui/core/Select";
 import TextField from "@material-ui/core/TextField";
+import ViewDetails from "../components/ViewDetails";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import { useDispatch } from "react-redux";
@@ -136,9 +137,21 @@ export default function DashboardPage() {
     }
   };
   console.log("ordersState", ordersState);
+  const [viewDetailsVisibility, handleViewDetailsVisibility] = React.useState(
+    false
+  );
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  console.log("ordersState.payload", ordersState.payload);
+  console.log("selectedIndex", selectedIndex);
   return (
     <div>
       <Navbar searchVal={searchVal} setSearchVal={setSearchVal} />
+      <ViewDetails
+        viewDetailsVisibility={viewDetailsVisibility}
+        handleViewDetailsVisibility={handleViewDetailsVisibility}
+        selectedIndex={selectedIndex}
+        orders={ordersState.payload}
+      />
       <Grid container className={classes.select}>
         <FormControl variant="filled" className={classes.sortBy}>
           <InputLabel>Sort By</InputLabel>
@@ -158,7 +171,12 @@ export default function DashboardPage() {
             return (
               ordersState.page * 6 > index && (
                 <Grid item xs={12} md={4} sm={12} className={classes.cardItem}>
-                  <CardItem details={obj} />
+                  <CardItem
+                    details={obj}
+                    setSelectedIndex={setSelectedIndex}
+                    index={index}
+                    handleViewDetailsVisibility={handleViewDetailsVisibility}
+                  />
                 </Grid>
               )
             );

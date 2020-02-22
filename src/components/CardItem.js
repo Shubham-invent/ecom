@@ -15,7 +15,12 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CardItem({ details }) {
+export default function CardItem({
+  details,
+  setSelectedIndex,
+  index,
+  handleViewDetailsVisibility
+}) {
   const classes = useStyles();
   const { title, price, seller, date, rating, address, imgUrl } = details;
 
@@ -46,7 +51,14 @@ export default function CardItem({ details }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => {
+            setSelectedIndex(index);
+            handleViewDetailsVisibility(true);
+          }}
+        >
           View Order Details
         </Button>
         <Button size="small" color="primary">
