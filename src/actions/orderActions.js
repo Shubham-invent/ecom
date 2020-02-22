@@ -1,4 +1,8 @@
-import { SET_ORDER_ITEMS_SYSTEM_1, SET_ORDER_ITEMS_SYSTEM_2 } from "./types";
+import {
+  SET_ORDER_ITEMS_SYSTEM_1,
+  SET_ORDER_ITEMS_SYSTEM_2,
+  SET_ORDER_PAGE
+} from "./types";
 import { system1API, system2API } from "../env";
 
 export function setOrderItemsSystem1(data) {
@@ -30,5 +34,18 @@ export function getOrderItemsSystem2() {
       .then(res => {
         dispatch(setOrderItemsSystem2(res));
       });
+  };
+}
+
+export function setOrderPage(data) {
+  return {
+    type: SET_ORDER_PAGE,
+    data
+  };
+}
+
+export function getOrderPage(page) {
+  return dispatch => {
+    dispatch(setOrderPage(page));
   };
 }

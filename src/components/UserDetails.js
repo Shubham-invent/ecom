@@ -12,6 +12,10 @@ const useStyles = makeStyles(theme => ({
       margin: theme.spacing(1),
       width: 200
     }
+  },
+  container: {
+    marginTop: theme.spacing(10),
+    padding: theme.spacing(4)
   }
 }));
 
@@ -38,7 +42,7 @@ export default function UserDetails() {
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <div>
+      <div className={classes.container}>
         <TextField
           id="outlined-password-input"
           label="First Name"
