@@ -14,7 +14,6 @@ import MailIcon from "@material-ui/icons/Mail";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-import { getSideMenu } from "../actions/sideMenuActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 
@@ -37,10 +36,6 @@ export default function Sidebar({
   };
   const history = useHistory();
   const [isRedirect, setIsRedirect] = React.useState(false);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    sidebarVisibility && dispatch(getSideMenu());
-  }, [dispatch]);
 
   const sideMenuItems = useSelector(
     state => state.sideMenuActionsReducer.payload

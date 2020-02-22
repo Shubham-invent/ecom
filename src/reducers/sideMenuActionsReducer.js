@@ -4,7 +4,7 @@ const initialState = {
   sideMenuFetched: false,
   sideMenuFetching: false,
   errSideMenu: false,
-  payload: {}
+  payload: []
 };
 
 export default (state = initialState, action = {}) => {

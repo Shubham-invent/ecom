@@ -7,7 +7,7 @@ export function setSideMenu(data) {
     data
   };
 }
-export function getSideMenu(data) {
+export function getSideMenu() {
   return dispatch => {
     return fetch(sidebarMenuAPI)
       .then(res => res.json())

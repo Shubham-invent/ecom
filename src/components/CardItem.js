@@ -15,8 +15,9 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CardItem() {
+export default function CardItem({ details }) {
   const classes = useStyles();
+  const { title, price, seller, date, rating, address, imgUrl } = details;
 
   return (
     <Card className={classes.root}>
@@ -25,28 +26,28 @@ export default function CardItem() {
           component="img"
           alt="Item"
           height="140"
-          image="https://exploringjs.com/impatient-js/img-homepage/cover-homepage.jpg"
+          image={imgUrl}
           title="Item"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Painting 1
+            {title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            400 USD
+            {price} USD
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Seller : Team Intuit
+            Seller : {seller}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Date : 20/12/2019
+            Date : {date}
           </Typography>
-          <Rating name="read-only" value={4} readOnly />
+          <Rating name="read-only" value={rating} readOnly />
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-          Add to Cart
+          View Order Details
         </Button>
         <Button size="small" color="primary">
           Buy Again

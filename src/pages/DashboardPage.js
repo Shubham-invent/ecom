@@ -1,28 +1,45 @@
 import { GoogleLogin, GoogleLogout } from "react-google-login";
+import React, { useEffect } from "react";
+import {
+  getOrderItemsSystem1,
+  getOrderItemsSystem2
+} from "../actions/orderActions";
 
 import CardItem from "../components/CardItem";
+import Grid from "@material-ui/core/Grid";
 import Navbar from "../components/Navbar";
-import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "react-google-login";
 import { useGoogleLogout } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: 200
-    }
+  body: {
+    padding: theme.spacing(5),
+    paddingTop: theme.spacing(15),
+    margin: "auto"
+  },
+  cardItem: {
+    display: "flex",
+    justifyContent: "center"
   }
 }));
 
 export default function DashboardPage() {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getOrderItemsSystem1());
+    dispatch(getOrderItemsSystem2());
+  }, [getOrderItemsSystem1, getOrderItemsSystem2]);
+
+  const orders = useSelector(state => state.orderActionsReducer.payload);
   const authObj = useSelector(state => state.loginActionsReducer.payload);
+  //console.log("orders", orders);
 
   if (!authObj || !authObj.googleId) {
     history.replace("/");
@@ -31,7 +48,15 @@ export default function DashboardPage() {
   return (
     <div>
       <Navbar />
-      <CardItem />
+      <Grid container spacing={3} className={classes.body}>
+        {orders.map((obj, index) => {
+          return (
+            <Grid item xs={12} md={4} sm={12} className={classes.cardItem}>
+              <CardItem details={obj} />
+            </Grid>
+          );
+        })}
+      </Grid>
     </div>
   );
 }

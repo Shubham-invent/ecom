@@ -5,6 +5,7 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { authRoute } from "../routes";
 import { getLoginUser } from "../actions/loginActions";
+import { getSideMenu } from "../actions/sideMenuActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "react-google-login";
@@ -29,6 +30,7 @@ export default function FormPropsTextFields() {
   const dispatch = useDispatch();
   const handleAuth = responseGoogle => {
     if (responseGoogle.profileObj.googleId) {
+      dispatch(getSideMenu());
       dispatch(getLoginUser(responseGoogle.profileObj));
       history.replace("/dashboard");
     }
