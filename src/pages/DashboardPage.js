@@ -30,7 +30,8 @@ const useStyles = makeStyles(theme => ({
   },
   paginationComponent: {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    padding: theme.spacing(5)
   }
 }));
 
@@ -38,10 +39,6 @@ export default function DashboardPage() {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getOrderItemsSystem1());
-    dispatch(getOrderItemsSystem2());
-  }, [getOrderItemsSystem1, getOrderItemsSystem2]);
   // const [page, setPage] = React.useState(1);
   const handleChange = (event, value) => {
     // setPage(value);
@@ -49,32 +46,71 @@ export default function DashboardPage() {
     dispatch(getOrderPage(value));
   };
 
-  const orders = useSelector(state => state.orderActionsReducer);
+  let orders = useSelector(state => state.orderActionsReducer);
+
   const authObj = useSelector(state => state.loginActionsReducer.payload);
+
+  const [searchVal, setSearchVal] = React.useState("");
+  const [ordersState, setOrdersState] = React.useState([]);
+
   //console.log("orders", orders);
 
   if (!authObj || !authObj.googleId) {
     history.replace("/");
   }
+  useEffect(() => {
+    console.log("orders changed", orders);
+    console.log("searchVal changed", searchVal);
+    setOrdersState(orders);
+    handleSearch(searchVal);
+  }, [orders, searchVal]);
 
+  const handleSearch = searchVal => {
+    let toBeSearched = String(searchVal);
+    let toBeFilteredArr = Object.assign({}, orders);
+    toBeFilteredArr.payload = toBeFilteredArr.payload.filter(value => {
+      return (
+        value.title.includes(toBeSearched) ||
+        value.price.toString().includes(toBeSearched) ||
+        value.seller.includes(toBeSearched) ||
+        value.date.includes(toBeSearched)
+      );
+    });
+
+    setOrdersState(toBeFilteredArr);
+
+    if (searchVal === "") {
+      console.log("searchval empty", searchVal);
+      console.log("orders", orders);
+
+      setOrdersState(orders);
+    }
+  };
+  console.log("ordersState", ordersState);
   return (
     <div>
-      <Navbar />
+      <Navbar searchVal={searchVal} setSearchVal={setSearchVal} />
       <Grid container spacing={3} className={classes.body}>
-        {orders.payload.map((obj, index) => {
-          return (
-            orders.page * 6 > index && (
-              <Grid item xs={12} md={4} sm={12} className={classes.cardItem}>
-                <CardItem details={obj} />
-              </Grid>
-            )
-          );
-        })}
+        {ordersState &&
+          ordersState.payload &&
+          ordersState.payload.map((obj, index) => {
+            return (
+              ordersState.page * 6 > index && (
+                <Grid item xs={12} md={4} sm={12} className={classes.cardItem}>
+                  <CardItem details={obj} />
+                </Grid>
+              )
+            );
+          })}
       </Grid>
       <Grid container spacing={3} className={classes.paginationComponent}>
         <Pagination
-          count={Math.ceil(orders.payload.length / 6)}
-          page={orders.page}
+          count={
+            ordersState && ordersState.payload
+              ? Math.ceil(ordersState.payload.length / 6)
+              : 1
+          }
+          page={ordersState.page}
           onChange={handleChange}
         />
       </Grid>

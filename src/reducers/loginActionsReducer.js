@@ -17,7 +17,7 @@ export default (state = initialState, action = {}) => {
         payload: action.data
       });
     case LOGOUT: {
-      return { payload: { message: "" } };
+      return {};
     }
 
     default:

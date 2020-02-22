@@ -1,4 +1,8 @@
 import { GoogleLogin, GoogleLogout } from "react-google-login";
+import {
+  getOrderItemsSystem1,
+  getOrderItemsSystem2
+} from "../actions/orderActions";
 
 import { CLIENT_ID } from "../constants/app-contants";
 import React from "react";
@@ -32,6 +36,10 @@ export default function FormPropsTextFields() {
     if (responseGoogle.profileObj.googleId) {
       dispatch(getSideMenu());
       dispatch(getLoginUser(responseGoogle.profileObj));
+
+      dispatch(getOrderItemsSystem1());
+      dispatch(getOrderItemsSystem2());
+
       history.replace("/dashboard");
     }
   };
