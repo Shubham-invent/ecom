@@ -1,3 +1,6 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 import Button from "@material-ui/core/Button";
 import { CLIENT_ID } from "../constants/app-contants";
 import Divider from "@material-ui/core/Divider";
@@ -11,6 +14,7 @@ import MailIcon from "@material-ui/icons/Mail";
 import React from "react";
 import { Redirect } from "react-router-dom";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import { getSideMenu } from "../actions/sideMenuActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 
@@ -34,13 +38,21 @@ export default function Sidebar({
   };
   const history = useHistory();
   const [isRedirect, setIsRedirect] = React.useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getSideMenu());
+  }, dispatch);
 
+  const sideMenuItems = useSelector(
+    state => state.sideMenuActionsReducer.payload
+  );
+  console.log("sideMenuItems", sideMenuItems);
   const sideList = () => (
     <div className={classes.list} role="presentation">
       <List>
-        {["My Profile", "My Orders", "My Todos"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemText primary={text} />
+        {sideMenuItems.map((item, index) => (
+          <ListItem button key={index}>
+            <ListItemText primary={item.name} />
           </ListItem>
         ))}
       </List>
@@ -65,7 +77,7 @@ export default function Sidebar({
         open={sidebarVisibility}
         onClose={() => handleSidebarVisibility(false)}
       >
-        {sideList()}
+        {sideMenuItems && sideList()}
       </SwipeableDrawer>
     </div>
   );

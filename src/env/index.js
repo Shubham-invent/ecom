@@ -1,2 +1,16 @@
-export const VerifyMailApi =
-  "https://api-ms.test.data2insights.ai/user/email/verification/";
+export const sidebarMenuAPI = "https://api.myjson.com/bins/10p68o";
+
+//   [
+//     {
+//       "name": "My Profile",
+//       "route": "/profile"
+//     },
+//     {
+//       "name": "My Orders",
+//       "route": "/dashboard"
+//     },
+//     {
+//       "name": "My ToDo",
+//       "route": "/todo"
+//     }
+//   ]

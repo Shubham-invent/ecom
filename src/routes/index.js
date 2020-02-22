@@ -2,6 +2,7 @@ import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import DashboardPage from "../pages/DashboardPage";
 import LoginPage from "../pages/LoginPage";
+import ProfilePage from "../pages/ProfilePage";
 import React from "react";
 
 export default function App() {
@@ -13,6 +14,9 @@ export default function App() {
         </Route>
         <Route path="/dashboard">
           <DashboardPage />
+        </Route>
+        <Route path="/profile">
+          <ProfilePage />
         </Route>
       </Switch>
     </Router>
