@@ -33,25 +33,24 @@ export default function Sidebar({
 }) {
   const classes = useStyles();
   const handleLogout = responseGoogle => {
-    console.log(responseGoogle);
     setIsRedirect(true);
   };
   const history = useHistory();
   const [isRedirect, setIsRedirect] = React.useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getSideMenu());
-  }, dispatch);
+    sidebarVisibility && dispatch(getSideMenu());
+  }, [dispatch]);
 
   const sideMenuItems = useSelector(
     state => state.sideMenuActionsReducer.payload
   );
-  console.log("sideMenuItems", sideMenuItems);
+
   const sideList = () => (
     <div className={classes.list} role="presentation">
       <List>
         {sideMenuItems.map((item, index) => (
-          <ListItem button key={index}>
+          <ListItem button key={index} onClick={() => history.push(item.route)}>
             <ListItemText primary={item.name} />
           </ListItem>
         ))}
@@ -76,6 +75,7 @@ export default function Sidebar({
       <SwipeableDrawer
         open={sidebarVisibility}
         onClose={() => handleSidebarVisibility(false)}
+        onOpen={() => handleSidebarVisibility(true)}
       >
         {sideMenuItems && sideList()}
       </SwipeableDrawer>

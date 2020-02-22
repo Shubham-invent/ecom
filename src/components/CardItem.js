@@ -38,6 +38,9 @@ export default function CardItem() {
           <Typography variant="body2" color="textSecondary" component="p">
             Seller : Team Intuit
           </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Date : 20/12/2019
+          </Typography>
           <Rating name="read-only" value={4} readOnly />
         </CardContent>
       </CardActionArea>
@@ -46,7 +49,7 @@ export default function CardItem() {
           Add to Cart
         </Button>
         <Button size="small" color="primary">
-          Buy Now
+          Buy Again
         </Button>
       </CardActions>
     </Card>

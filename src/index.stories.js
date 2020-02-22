@@ -1,4 +1,4 @@
-import Card from "./components/Card";
+import Card from "./components/CardItem";
 import Navbar from "./components/Navbar";
 import React from "react";
 import Sidebar from "./components/Sidebar";

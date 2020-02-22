@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export default (state = initialState, action = {}) => {
-  console.log("reducer", action);
   switch (action.type) {
     case SET_LOGIN_USER:
       return Object.assign({}, state, {

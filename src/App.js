@@ -1,5 +1,7 @@
 import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
 
+import { ToastContainer, toast } from "react-toastify";
 import { refreshState, saveState } from "./store/localStorage";
 
 import Checkbox from "@material-ui/core/Checkbox";
@@ -21,6 +23,7 @@ store.subscribe(() => {
 function App() {
   return (
     <div>
+      <ToastContainer />
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <Routes />

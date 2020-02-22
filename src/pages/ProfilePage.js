@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const classes = useStyles();
   const history = useHistory();
   const authObj = useSelector(state => state.loginActionsReducer.payload);
-  console.log(authObj);
+
   if (!authObj.googleId) {
     history.replace("/");
   }
