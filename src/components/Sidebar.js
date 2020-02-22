@@ -1,5 +1,7 @@
 import Button from "@material-ui/core/Button";
+import { CLIENT_ID } from "../constants/app-contants";
 import Divider from "@material-ui/core/Divider";
+import { GoogleLogout } from "react-google-login";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -7,8 +9,10 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import MailIcon from "@material-ui/icons/Mail";
 import React from "react";
+import { Redirect } from "react-router-dom";
 import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 import { makeStyles } from "@material-ui/core/styles";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   list: {
@@ -19,31 +23,20 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SwipeableTemporaryDrawer() {
+export default function Sidebar({
+  sidebarVisibility,
+  handleSidebarVisibility
+}) {
   const classes = useStyles();
-  const [state, setState] = React.useState({
-    left: true
-  });
-
-  const toggleDrawer = (side, open) => event => {
-    if (
-      event &&
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [side]: open });
+  const handleLogout = responseGoogle => {
+    console.log(responseGoogle);
+    setIsRedirect(true);
   };
+  const history = useHistory();
+  const [isRedirect, setIsRedirect] = React.useState(false);
 
-  const sideList = side => (
-    <div
-      className={classes.list}
-      role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-    >
+  const sideList = () => (
+    <div className={classes.list} role="presentation">
       <List>
         {["My Profile", "My Orders", "My Todos"].map((text, index) => (
           <ListItem button key={text}>
@@ -55,7 +48,11 @@ export default function SwipeableTemporaryDrawer() {
       <List>
         {["Logout"].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemText primary={text} />
+            <GoogleLogout
+              clientId={CLIENT_ID}
+              buttonText="Logout"
+              onLogoutSuccess={handleLogout}
+            ></GoogleLogout>
           </ListItem>
         ))}
       </List>
@@ -63,12 +60,12 @@ export default function SwipeableTemporaryDrawer() {
   );
   return (
     <div>
+      {isRedirect ? <Redirect to="/" push={false} /> : ""}
       <SwipeableDrawer
-        open={state.left}
-        onClose={toggleDrawer("left", false)}
-        onOpen={toggleDrawer("left", true)}
+        open={sidebarVisibility}
+        onClose={() => handleSidebarVisibility(false)}
       >
-        {sideList("left")}
+        {sideList()}
       </SwipeableDrawer>
     </div>
   );

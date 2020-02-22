@@ -13,6 +13,7 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
+import Sidebar from "../components/Sidebar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
@@ -86,6 +87,8 @@ export default function PrimarySearchAppBar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
+  const [sidebarVisibility, handleSidebarVisibility] = React.useState(false);
+
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -152,6 +155,7 @@ export default function PrimarySearchAppBar() {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
+            onClick={() => handleSidebarVisibility(true)}
           >
             <MenuIcon />
           </IconButton>
@@ -199,6 +203,10 @@ export default function PrimarySearchAppBar() {
       </AppBar>
       {renderMobileMenu}
       {renderMenu}
+      <Sidebar
+        sidebarVisibility={sidebarVisibility}
+        handleSidebarVisibility={handleSidebarVisibility}
+      />
     </div>
   );
 }
