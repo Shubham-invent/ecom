@@ -1,14 +1,11 @@
+import Card from "./components/Card";
+import Navbar from "./components/Navbar";
 import React from "react";
-import { Button } from "@storybook/react/demo";
+import Sidebar from "./components/Sidebar";
+import UserDetails from "./components/UserDetails";
 
-export default { title: "Button" };
-
-export const withText = () => <Button>Hello Button</Button>;
-
-export const withEmoji = () => (
-  <Button>
-    <span role="img" aria-label="so cool">
-      😀 😎 👍 💯
-    </span>
-  </Button>
-);
+export default { title: "Common Components" };
+export const NavbarComponent = () => <Navbar />;
+export const SidebarComponent = () => <Sidebar />;
+export const CardComponent = () => <Card />;
+export const UserDetailsComponent = () => <UserDetails />;
