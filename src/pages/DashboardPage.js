@@ -93,14 +93,17 @@ export default function DashboardPage() {
   };
 
   const handleSearch = searchVal => {
-    let toBeSearched = String(searchVal);
+    let toBeSearched = String(searchVal).toLowerCase();
     let toBeFilteredArr = Object.assign({}, orders);
     toBeFilteredArr.payload = toBeFilteredArr.payload.filter(value => {
       return (
-        value.title.includes(toBeSearched) ||
-        value.price.toString().includes(toBeSearched) ||
-        value.seller.includes(toBeSearched) ||
-        value.date.includes(toBeSearched)
+        value.title.toLowerCase().includes(toBeSearched) ||
+        value.price
+          .toString()
+          .toLowerCase()
+          .includes(toBeSearched) ||
+        value.seller.toLowerCase().includes(toBeSearched) ||
+        value.date.toLowerCase().includes(toBeSearched)
       );
     });
 

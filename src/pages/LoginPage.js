@@ -43,7 +43,7 @@ export default function FormPropsTextFields() {
   return (
     <div>
       <p className={classes.loginText}>
-        Login to Intuit Cart using Google Credentials
+        Login to Open Cart using Google Credentials
       </p>
       <div className={classes.loginCard}>
         <GoogleLogin
