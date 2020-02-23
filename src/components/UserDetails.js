@@ -1,10 +1,9 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
 import Button from "@material-ui/core/Button";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,12 +22,12 @@ export default function UserDetails() {
   const classes = useStyles();
   const userObj = useSelector(state => state.loginActionsReducer.payload);
   const [updateUser, setUpdateUser] = React.useState(
-    localStorage.getItem(userObj.googleId + "_user")
+    userObj &&
+      userObj.googleId &&
+      localStorage.getItem(userObj.googleId + "_user")
       ? JSON.parse(localStorage.getItem(userObj.googleId + "_user"))
       : {}
   );
-  console.log("userObj", userObj);
-
   const handleUpdate = (key, e) => {
     setUpdateUser({ ...updateUser, [key]: e.target.value });
   };
@@ -44,7 +43,7 @@ export default function UserDetails() {
     <form className={classes.root} noValidate autoComplete="off">
       <div className={classes.container}>
         <TextField
-          id="outlined-password-input"
+          id="outlined-input1"
           label="First Name"
           type="text"
           variant="outlined"
@@ -52,7 +51,7 @@ export default function UserDetails() {
           disabled
         />
         <TextField
-          id="outlined-password-input"
+          id="outlined-input2"
           label="Last Name"
           type="text"
           variant="outlined"

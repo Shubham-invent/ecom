@@ -22,7 +22,7 @@ export default function CardItem({
   handleViewDetailsVisibility
 }) {
   const classes = useStyles();
-  const { title, price, seller, date, rating, address, imgUrl } = details;
+  const { title, price, seller, date, rating, imgUrl } = details;
 
   return (
     <Card className={classes.root}>

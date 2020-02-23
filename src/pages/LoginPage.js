@@ -1,19 +1,15 @@
-import { GoogleLogin, GoogleLogout } from "react-google-login";
 import {
   getOrderItemsSystem1,
   getOrderItemsSystem2
 } from "../actions/orderActions";
 
 import { CLIENT_ID } from "../constants/app-contants";
+import { GoogleLogin } from "react-google-login";
 import React from "react";
-import TextField from "@material-ui/core/TextField";
-import { authRoute } from "../routes";
 import { getLoginUser } from "../actions/loginActions";
 import { getSideMenu } from "../actions/sideMenuActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
-import { useGoogleLogin } from "react-google-login";
-import { useGoogleLogout } from "react-google-login";
 import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({

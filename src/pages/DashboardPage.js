@@ -1,31 +1,20 @@
-import { GoogleLogin, GoogleLogout } from "react-google-login";
 import React, { useEffect } from "react";
-import {
-  getOrderItemsSystem1,
-  getOrderItemsSystem2,
-  getOrderPage,
-  getOrderPayload
-} from "../actions/orderActions";
+import { getOrderPage, getOrderPayload } from "../actions/orderActions";
+import { useDispatch, useSelector } from "react-redux";
 
 import CardItem from "../components/CardItem";
 import FormControl from "@material-ui/core/FormControl";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import Grid from "@material-ui/core/Grid";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Navbar from "../components/Navbar";
 import Pagination from "@material-ui/lab/Pagination";
 import Select from "@material-ui/core/Select";
-import TextField from "@material-ui/core/TextField";
 import ViewDetails from "../components/ViewDetails";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { useGoogleLogin } from "react-google-login";
-import { useGoogleLogout } from "react-google-login";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const useStyles = makeStyles(theme => ({
   body: {
@@ -67,33 +56,13 @@ export default function DashboardPage() {
   let orders = useSelector(state => state.orderActionsReducer);
 
   const authObj = useSelector(state => state.loginActionsReducer.payload);
+  if (!authObj || Object.keys(authObj) === 0) {
+    history.replace("/");
+  }
 
   const [searchVal, setSearchVal] = React.useState("");
   const [ordersState, setOrdersState] = React.useState([]);
   const [sortBy, setSortBy] = React.useState("");
-
-  //console.log("orders", orders);
-
-  if (!authObj || !authObj.googleId) {
-    history.replace("/");
-  }
-  useEffect(() => {
-    console.log("orders changed", orders);
-    console.log("searchVal changed", searchVal);
-    setOrdersState(orders);
-    handleSearch(searchVal);
-    updateAddressLocal(
-      selectedIndex >= 0 &&
-        orders &&
-        orders[selectedIndex] &&
-        orders[selectedIndex].address
-    );
-  }, [orders, searchVal]);
-
-  useEffect(() => {
-    console.log("sortBy changed", sortBy);
-    handleSort();
-  }, [sortBy]);
 
   const handleSort = () => {
     dispatch(getOrderPage(1));
@@ -138,19 +107,13 @@ export default function DashboardPage() {
     setOrdersState(toBeFilteredArr);
 
     if (searchVal === "") {
-      console.log("searchval empty", searchVal);
-      console.log("orders", orders);
-
       setOrdersState(orders);
     }
   };
-  console.log("ordersState", ordersState);
   const [viewDetailsVisibility, handleViewDetailsVisibility] = React.useState(
     false
   );
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-  console.log("ordersState.payload", ordersState.payload);
-  console.log("selectedIndex", selectedIndex);
   const [addressUpdated, updateAddressLocal] = React.useState("");
 
   const updateAddressStore = () => {
@@ -158,6 +121,20 @@ export default function DashboardPage() {
     toast.success("Successfully Updated");
     dispatch(getOrderPayload(ordersState.payload));
   };
+
+  useEffect(() => {
+    setOrdersState(orders);
+    handleSearch(searchVal);
+    updateAddressLocal(
+      selectedIndex >= 0 &&
+        orders &&
+        orders[selectedIndex] &&
+        orders[selectedIndex].address
+    );
+  }, [orders, searchVal, selectedIndex]);
+  useEffect(() => {
+    handleSort();
+  }, [sortBy]);
 
   return (
     <div>
@@ -197,7 +174,14 @@ export default function DashboardPage() {
           ordersState.payload.map((obj, index) => {
             return (
               ordersState.page * 6 > index && (
-                <Grid item xs={12} md={4} sm={12} className={classes.cardItem}>
+                <Grid
+                  item
+                  xs={12}
+                  md={4}
+                  sm={12}
+                  className={classes.cardItem}
+                  key={index}
+                >
                   <CardItem
                     details={obj}
                     setSelectedIndex={setSelectedIndex}

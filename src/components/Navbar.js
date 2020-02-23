@@ -2,15 +2,10 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AppBar from "@material-ui/core/AppBar";
-import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
 import InputBase from "@material-ui/core/InputBase";
-import MailIcon from "@material-ui/icons/Mail";
-import Menu from "@material-ui/core/Menu";
 import MenuIcon from "@material-ui/icons/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import React from "react";
 import SearchIcon from "@material-ui/icons/Search";
 import Sidebar from "../components/Sidebar";

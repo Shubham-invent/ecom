@@ -2,7 +2,6 @@ import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import Slide from "@material-ui/core/Slide";
@@ -25,7 +24,6 @@ export default function ViewDetails({
   const handleClose = () => {
     handleViewDetailsVisibility(false);
   };
-  console.log("address updated", addressUpdated);
   return (
     <div>
       <Dialog
@@ -40,46 +38,43 @@ export default function ViewDetails({
           {"Order Details"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            <Typography gutterBottom variant="h5" component="h2">
-              {selectedIndex >= 0 &&
-                orders &&
-                orders[selectedIndex] &&
-                orders[selectedIndex].title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {selectedIndex >= 0 &&
-                orders &&
-                orders[selectedIndex] &&
-                orders[selectedIndex].price}{" "}
-              USD
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Seller :{" "}
-              {selectedIndex >= 0 &&
-                orders &&
-                orders[selectedIndex] &&
-                orders[selectedIndex].seller}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Date :{" "}
-              {selectedIndex >= 0 &&
-                orders &&
-                orders[selectedIndex] &&
-                orders[selectedIndex].date}
-            </Typography>
+          <Typography gutterBottom>
+            {selectedIndex >= 0 &&
+              orders &&
+              orders[selectedIndex] &&
+              orders[selectedIndex].title}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            {selectedIndex >= 0 &&
+              orders &&
+              orders[selectedIndex] &&
+              orders[selectedIndex].price}{" "}
+            USD
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Seller :{" "}
+            {selectedIndex >= 0 &&
+              orders &&
+              orders[selectedIndex] &&
+              orders[selectedIndex].seller}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Date :{" "}
+            {selectedIndex >= 0 &&
+              orders &&
+              orders[selectedIndex] &&
+              orders[selectedIndex].date}
+          </Typography>
 
-            <Typography style={{ paddingTop: "20px" }}>
-              <TextField
-                id="outlined-basic"
-                label="Address"
-                variant="outlined"
-                value={addressUpdated || ""}
-                defaultValue={addressUpdated || ""}
-                onChange={e => updateAddressLocal(e.target.value)}
-              />
-            </Typography>
-          </DialogContentText>
+          <div style={{ paddingTop: "20px" }}>
+            <TextField
+              id="outlined-basic"
+              label="Address"
+              variant="outlined"
+              value={addressUpdated || ""}
+              onChange={e => updateAddressLocal(e.target.value)}
+            />
+          </div>
         </DialogContent>
         <DialogActions>
           <Button

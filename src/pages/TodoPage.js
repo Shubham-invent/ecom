@@ -1,16 +1,11 @@
-import { GoogleLogin, GoogleLogout } from "react-google-login";
-
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import ListItem from "../components/ListItem";
 import Navbar from "../components/Navbar";
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import UserDetails from "../components/UserDetails";
 import { makeStyles } from "@material-ui/core/styles";
 import { toast } from "react-toastify";
-import { useGoogleLogin } from "react-google-login";
-import { useGoogleLogout } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -21,9 +16,10 @@ const useStyles = makeStyles(theme => ({
       width: 200
     }
   },
-  container: {
+  containerMain: {
     display: "flex",
-    padding: theme.spacing(5)
+    padding: theme.spacing(5),
+    paddingTop: theme.spacing(10)
   },
   item: {
     margin: theme.spacing(4)
@@ -35,17 +31,18 @@ export default function TodoPage() {
   const history = useHistory();
   const authObj = useSelector(state => state.loginActionsReducer.payload);
 
-  if (!authObj.googleId) {
+  if (!authObj || Object.keys(authObj) === 0) {
     history.replace("/");
   }
 
   const [noteObj, setNoteObj] = React.useState({});
   const [noteArr, setNoteArr] = React.useState(
-    localStorage.getItem(authObj.googleId + "_notes")
+    authObj &&
+      authObj.googleId &&
+      localStorage.getItem(authObj.googleId + "_notes")
       ? JSON.parse(localStorage.getItem(authObj.googleId + "_notes"))
       : []
   );
-  console.log("noteArr", noteArr);
 
   const handleText = (key, e) => {
     setNoteObj({ ...noteObj, [key]: e.target.value });
@@ -54,7 +51,6 @@ export default function TodoPage() {
     let temp = noteArr;
     temp.push(noteObj);
     setNoteArr([...temp]);
-    console.log(noteArr);
     localStorage.setItem(authObj.googleId + "_notes", JSON.stringify(noteArr));
     toast.success("Successfully Updated");
   };
@@ -62,15 +58,10 @@ export default function TodoPage() {
   return (
     <div>
       <Navbar />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <Grid container spacing={5} className={classes.container}>
-        <Grid md={12} xs={12} sm={12} spacing={5} item>
+      <Grid container spacing={5} className={classes.containerMain}>
+        <Grid md={12} xs={12} sm={12} item>
           <TextField
-            id="outlined-basic"
+            id="outlined-basic1"
             label="Subject"
             variant="outlined"
             fullWidth
@@ -78,16 +69,16 @@ export default function TodoPage() {
           />
         </Grid>
 
-        <Grid md={12} xs={12} sm={12} spacing={5} item>
+        <Grid md={12} xs={12} sm={12} item>
           <TextField
-            id="outlined-basic"
+            id="outlined-basic2"
             label="Content"
             variant="outlined"
             fullWidth
             onChange={e => handleText("text", e)}
           />
         </Grid>
-        <Grid md={12} xs={12} sm={12} spacing={5} item>
+        <Grid md={12} xs={12} sm={12} item>
           <Button variant="contained" color="primary" onClick={persistNotes}>
             Save Notes
           </Button>
@@ -95,8 +86,8 @@ export default function TodoPage() {
       </Grid>
       <br />
 
-      {noteArr.map(value => {
-        return <ListItem title={value.title} text={value.text} />;
+      {noteArr.map((value, index) => {
+        return <ListItem title={value.title} text={value.text} key={index} />;
       })}
     </div>
   );

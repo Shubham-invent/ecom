@@ -1,14 +1,13 @@
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { ToastContainer, toast } from "react-toastify";
 import { refreshState, saveState } from "./store/localStorage";
 
-import Checkbox from "@material-ui/core/Checkbox";
 import { Provider } from "react-redux";
 import React from "react";
 import Routes from "./routes";
 import { ThemeProvider } from "@material-ui/core/styles";
+import { ToastContainer } from "react-toastify";
 import configureStore from "./store/configureStore";
 import theme from "./theme/materialTheme";
 

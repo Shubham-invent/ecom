@@ -18,7 +18,6 @@ const initialState = {
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_ORDER_ITEMS_SYSTEM_1:
-      console.log("1", state);
       return Object.assign({}, state, {
         orderItemsFetched: true,
         orderItemsFetching: false,
