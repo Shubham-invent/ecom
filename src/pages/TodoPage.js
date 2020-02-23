@@ -53,6 +53,7 @@ export default function TodoPage() {
     setNoteArr([...temp]);
     localStorage.setItem(authObj.googleId + "_notes", JSON.stringify(noteArr));
     toast.success("Successfully Updated");
+    setNoteObj({});
   };
 
   return (
@@ -65,6 +66,7 @@ export default function TodoPage() {
             label="Subject"
             variant="outlined"
             fullWidth
+            value={noteObj["title"] || ""}
             onChange={e => handleText("title", e)}
           />
         </Grid>
@@ -75,6 +77,7 @@ export default function TodoPage() {
             label="Content"
             variant="outlined"
             fullWidth
+            value={noteObj["text"] || ""}
             onChange={e => handleText("text", e)}
           />
         </Grid>
