@@ -1,7 +1,8 @@
 import {
   SET_ORDER_ITEMS_SYSTEM_1,
   SET_ORDER_ITEMS_SYSTEM_2,
-  SET_ORDER_PAGE
+  SET_ORDER_PAGE,
+  SET_ORDER_PAYLOAD
 } from "../actions/types";
 
 const initialState = {
@@ -36,6 +37,10 @@ export default (state = initialState, action = {}) => {
     case SET_ORDER_PAGE:
       return Object.assign({}, state, {
         page: action.data
+      });
+    case SET_ORDER_PAYLOAD:
+      return Object.assign({}, state, {
+        payload: action.data
       });
 
     default:

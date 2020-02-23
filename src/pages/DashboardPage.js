@@ -3,7 +3,8 @@ import React, { useEffect } from "react";
 import {
   getOrderItemsSystem1,
   getOrderItemsSystem2,
-  getOrderPage
+  getOrderPage,
+  getOrderPayload
 } from "../actions/orderActions";
 
 import CardItem from "../components/CardItem";
@@ -19,6 +20,7 @@ import TextField from "@material-ui/core/TextField";
 import ViewDetails from "../components/ViewDetails";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { useGoogleLogin } from "react-google-login";
 import { useGoogleLogout } from "react-google-login";
@@ -80,6 +82,12 @@ export default function DashboardPage() {
     console.log("searchVal changed", searchVal);
     setOrdersState(orders);
     handleSearch(searchVal);
+    updateAddressLocal(
+      selectedIndex >= 0 &&
+        orders &&
+        orders[selectedIndex] &&
+        orders[selectedIndex].address
+    );
   }, [orders, searchVal]);
 
   useEffect(() => {
@@ -143,6 +151,14 @@ export default function DashboardPage() {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   console.log("ordersState.payload", ordersState.payload);
   console.log("selectedIndex", selectedIndex);
+  const [addressUpdated, updateAddressLocal] = React.useState("");
+
+  const updateAddressStore = () => {
+    ordersState.payload[selectedIndex].address = addressUpdated;
+    toast.success("Successfully Updated");
+    dispatch(getOrderPayload(ordersState.payload));
+  };
+
   return (
     <div>
       <Navbar searchVal={searchVal} setSearchVal={setSearchVal} />
@@ -151,6 +167,17 @@ export default function DashboardPage() {
         handleViewDetailsVisibility={handleViewDetailsVisibility}
         selectedIndex={selectedIndex}
         orders={ordersState.payload}
+        updateAddressLocal={updateAddressLocal}
+        updateAddressStore={updateAddressStore}
+        addressUpdated={
+          addressUpdated
+            ? addressUpdated
+            : selectedIndex >= 0 &&
+              ordersState &&
+              ordersState.payload &&
+              ordersState.payload[selectedIndex] &&
+              ordersState.payload[selectedIndex].address
+        }
       />
       <Grid container className={classes.select}>
         <FormControl variant="filled" className={classes.sortBy}>

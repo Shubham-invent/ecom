@@ -6,6 +6,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import React from "react";
 import Slide from "@material-ui/core/Slide";
+import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -16,12 +17,15 @@ export default function ViewDetails({
   viewDetailsVisibility,
   handleViewDetailsVisibility,
   selectedIndex,
-  orders
+  orders,
+  updateAddressLocal,
+  updateAddressStore,
+  addressUpdated
 }) {
   const handleClose = () => {
     handleViewDetailsVisibility(false);
   };
-
+  console.log("address updated", addressUpdated);
   return (
     <div>
       <Dialog
@@ -64,20 +68,36 @@ export default function ViewDetails({
                 orders[selectedIndex] &&
                 orders[selectedIndex].date}
             </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              Address :{" "}
-              {selectedIndex >= 0 &&
-                orders &&
-                orders[selectedIndex] &&
-                orders[selectedIndex].address}
+
+            <Typography style={{ paddingTop: "20px" }}>
+              <TextField
+                id="outlined-basic"
+                label="Address"
+                variant="outlined"
+                value={addressUpdated || ""}
+                defaultValue={addressUpdated || ""}
+                onChange={e => updateAddressLocal(e.target.value)}
+              />
             </Typography>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={() => {
+              updateAddressStore();
+              handleClose();
+            }}
+            color="primary"
+          >
             Update Address
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button
+            onClick={() => {
+              updateAddressLocal("");
+              handleClose();
+            }}
+            color="primary"
+          >
             Close
           </Button>
         </DialogActions>
