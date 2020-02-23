@@ -29,6 +29,7 @@ export default function FormPropsTextFields() {
   const history = useHistory();
   const dispatch = useDispatch();
   const handleAuth = responseGoogle => {
+    console.log(JSON.stringify(responseGoogle));
     if (responseGoogle.profileObj.googleId) {
       dispatch(getSideMenu());
       dispatch(getLoginUser(responseGoogle.profileObj));
