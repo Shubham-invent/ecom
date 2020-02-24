@@ -15,15 +15,22 @@ const useStyles = makeStyles({
   }
 });
 
-export default function CardItem({
+export default function OrderItem({
   details,
-  setSelectedIndex,
-  index,
-  handleViewDetailsVisibility,
+  goBackToOrders,
   navigateToNotesWithOrderId
 }) {
   const classes = useStyles();
-  const { title, price, seller, date, rating, imgUrl, orderId } = details;
+  const {
+    title,
+    price,
+    seller,
+    date,
+    rating,
+    imgUrl,
+    orderId,
+    address
+  } = details;
 
   return (
     <Card className={classes.root}>
@@ -49,6 +56,12 @@ export default function CardItem({
             Date : {date}
           </Typography>
           <Rating name="read-only" value={rating} readOnly />
+          <Typography variant="body2" color="textSecondary" component="p">
+            Address : {address}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            OrderId : {orderId}
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -56,11 +69,10 @@ export default function CardItem({
           size="small"
           color="primary"
           onClick={() => {
-            setSelectedIndex(index);
-            handleViewDetailsVisibility(true);
+            goBackToOrders();
           }}
         >
-          View Order Details
+          Back to All Orders
         </Button>
         <Button
           size="small"

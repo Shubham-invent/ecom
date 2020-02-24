@@ -6,9 +6,12 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  orderItemsFetched: false,
-  orderItemsFetching: false,
-  errOrderItems: false,
+  orderItemsFetchedSys1: false,
+  orderItemsFetchingSys1: false,
+  errOrderItemsSys1: false,
+  orderItemsFetchedSys2: false,
+  orderItemsFetchingSys2: false,
+  errOrderItemsSys2: false,
   payload: [],
   resSystem1: [],
   resSystem2: [],
@@ -19,17 +22,17 @@ export default (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_ORDER_ITEMS_SYSTEM_1:
       return Object.assign({}, state, {
-        orderItemsFetched: true,
-        orderItemsFetching: false,
-        errOrderItems: false,
+        orderItemsFetchedSys1: true,
+        orderItemsFetchingSys1: false,
+        errOrderItemsSys1: false,
         resSystem1: action.data,
         payload: [...state.resSystem2, ...action.data]
       });
     case SET_ORDER_ITEMS_SYSTEM_2:
       return Object.assign({}, state, {
-        orderItemsFetched: true,
-        orderItemsFetching: false,
-        errOrderItems: false,
+        orderItemsFetchedSys2: true,
+        orderItemsFetchingSys2: false,
+        errOrderItemsSys2: false,
         resSystem2: action.data,
         payload: [...state.resSystem1, ...action.data]
       });

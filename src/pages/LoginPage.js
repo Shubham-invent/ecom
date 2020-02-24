@@ -1,12 +1,8 @@
-import {
-  getOrderItemsSystem1,
-  getOrderItemsSystem2
-} from "../actions/orderActions";
-
 import { CLIENT_ID } from "../constants/app-contants";
 import { GoogleLogin } from "react-google-login";
 import React from "react";
 import { getLoginUser } from "../actions/loginActions";
+import { getOrderItemsSystem1 } from "../actions/orderActions";
 import { getSideMenu } from "../actions/sideMenuActions";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
@@ -35,7 +31,6 @@ export default function FormPropsTextFields() {
       dispatch(getLoginUser(responseGoogle.profileObj));
 
       dispatch(getOrderItemsSystem1());
-      dispatch(getOrderItemsSystem2());
 
       history.replace("/dashboard");
     }

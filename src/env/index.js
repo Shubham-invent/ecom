@@ -15,7 +15,9 @@ export const sidebarMenuAPI = "https://api.myjson.com/bins/10p68o";
 //     }
 //   ]
 
-export const system1API = "https://api.myjson.com/bins/ompt4";
+export const system1API = "https://api.myjson.com/bins/lbhdc";
+//old
+//"https://api.myjson.com/bins/ompt4";
 
 // [
 //     {
@@ -290,7 +292,10 @@ export const system1API = "https://api.myjson.com/bins/ompt4";
 //     }
 //   ]
 
-export const system2API = "https://api.myjson.com/bins/o1a7c";
+export const system2API = "https://api.myjson.com/bins/1h668g";
+//"https://api.myjson.com/bins/g4bps";
+//old
+//"https://api.myjson.com/bins/o1a7c";
 
 // [
 //   {

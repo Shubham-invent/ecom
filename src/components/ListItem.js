@@ -1,4 +1,5 @@
 import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -20,7 +21,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ListItemComponent({ title, text }) {
+export default function ListItemComponent({
+  title,
+  text,
+  noteMapped,
+  navigateToOrderDetails
+}) {
   const classes = useStyles();
 
   return (
@@ -44,6 +50,13 @@ export default function ListItemComponent({ title, text }) {
               </React.Fragment>
             }
           />
+          {noteMapped && noteMapped !== "none" ? (
+            <Button onClick={() => navigateToOrderDetails(noteMapped)}>
+              Go to Order of OrderId:{noteMapped}
+            </Button>
+          ) : (
+            ""
+          )}
         </ListItem>
         <Divider variant="inset" component="li" />
       </List>

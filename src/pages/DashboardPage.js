@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { getOrderPage, getOrderPayload } from "../actions/orderActions";
 import { useDispatch, useSelector } from "react-redux";
 
+import Button from "@material-ui/core/Button";
 import CardItem from "../components/CardItem";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
@@ -11,6 +12,7 @@ import Navbar from "../components/Navbar";
 import Pagination from "@material-ui/lab/Pagination";
 import Select from "@material-ui/core/Select";
 import ViewDetails from "../components/ViewDetails";
+import { getOrderItemsSystem2 } from "../actions/orderActions";
 import { makeStyles } from "@material-ui/core/styles";
 import moment from "moment";
 import { toast } from "react-toastify";
@@ -139,6 +141,17 @@ export default function DashboardPage() {
     handleSort();
   }, [sortBy]);
 
+  const navigateToNotesWithOrderId = orderId => {
+    history.replace("todo?orderId=" + orderId);
+  };
+  const handleLoadMore = () => {
+    dispatch(getOrderItemsSystem2());
+  };
+  useEffect(() => {
+    setOrdersState({ ...orders });
+    console.log("orders changed", orders);
+  }, [orders]);
+  console.log("ordersState", ordersState);
   return (
     <div>
       <Navbar searchVal={searchVal} setSearchVal={setSearchVal} />
@@ -176,28 +189,29 @@ export default function DashboardPage() {
           ordersState.payload &&
           ordersState.payload.map((obj, index) => {
             return (
-              ordersState.page * 6 > index && (
-                <Grid
-                  item
-                  xs={12}
-                  md={4}
-                  sm={12}
-                  className={classes.cardItem}
-                  key={index}
-                >
-                  <CardItem
-                    details={obj}
-                    setSelectedIndex={setSelectedIndex}
-                    index={index}
-                    handleViewDetailsVisibility={handleViewDetailsVisibility}
-                  />
-                </Grid>
-              )
+              // ordersState.page * 6 > index && (
+              <Grid
+                item
+                xs={12}
+                md={4}
+                sm={12}
+                className={classes.cardItem}
+                key={index}
+              >
+                <CardItem
+                  details={obj}
+                  setSelectedIndex={setSelectedIndex}
+                  index={index}
+                  handleViewDetailsVisibility={handleViewDetailsVisibility}
+                  navigateToNotesWithOrderId={navigateToNotesWithOrderId}
+                />
+              </Grid>
             );
+            //);
           })}
       </Grid>
       <Grid container spacing={3} className={classes.paginationComponent}>
-        <Pagination
+        {/* <Pagination
           count={
             ordersState && ordersState.payload
               ? Math.ceil(ordersState.payload.length / 6)
@@ -205,7 +219,12 @@ export default function DashboardPage() {
           }
           page={orders.page}
           onChange={handleChange}
-        />
+        /> */}
+        {orders.orderItemsFetchedSys2 || orders.orderItemsFetchingSys2 ? (
+          ""
+        ) : (
+          <Button onClick={handleLoadMore}>Load More Data From API</Button>
+        )}
       </Grid>
     </div>
   );
