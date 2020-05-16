@@ -137,7 +137,12 @@ export default function FormPropsTextFields() {
       <div className="div-padding-normal">
         <div
           id="mapbox"
-          style={{ position: "absolute", width: "100%", minHeight: "500px" }}
+          style={{
+            // position: "absolute",
+            // width: "100%",
+            minHeight: "500px",
+            // paddingRight: "20px",
+          }}
         />
       </div>
     </div>

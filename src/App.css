@@ -5,7 +5,7 @@
   left: calc(50% - 94px / 2);
   top: calc(50% - 25px / 2 + 2.5px);
 
-  font-family: 'Righteous' !important;
+  font-family: "Righteous" !important;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -26,7 +26,7 @@
   right: 5px;
   /* left: calc(50% - 177px / 2 - 45.5px); */
   top: calc(50% - 16px / 2 + 0.5px);
-  font-family: 'Quattrocento Sans' !important;
+  font-family: "Quattrocento Sans" !important;
   font-style: normal;
   font-weight: bold !important;
   font-size: 14px !important;
@@ -49,7 +49,7 @@
   top: 0%;
   bottom: 0%; */
 
-  font-family: 'Quattrocento Sans' !important;
+  font-family: "Quattrocento Sans" !important;
   font-style: normal;
   font-weight: normal;
   font-size: 20px;
@@ -66,7 +66,7 @@
 }
 
 .login-github-text {
-  font-family: 'Quattrocento Sans' !important;
+  font-family: "Quattrocento Sans" !important;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -148,7 +148,7 @@
 
 .login-select-text {
   text-align: center;
-  font-family: 'Roboto' !important;
+  font-family: "Roboto" !important;
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -158,6 +158,121 @@
   text-align: center;
   letter-spacing: 0.75px;
   text-transform: uppercase;
+
+  color: #4f4f4f;
+}
+
+.dev-dash-connect-btn {
+  position: absolute !important;
+  right: 20px;
+  background-color: #4f4f4f !important;
+  border-radius: 0px !important;
+  color: white !important;
+}
+
+.dev-dash-git-login-btn {
+  background-color: #4f4f4f !important;
+  border-radius: 0px !important;
+  color: white !important;
+}
+.github-profile-img {
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #eb5757 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  height: 200px;
+  width: 200px;
+}
+.github-name {
+  font-family: "Quattrocento Sans" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+  /* identical to box height, or 140% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+}
+.github-link {
+  font-family: "Quattrocento Sans" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.44px;
+
+  /* Gray 2 */
+
+  color: #4f4f4f;
+}
+.github-member-since {
+  font-family: "Roboto" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 143% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+
+  /* Dark Color */
+
+  color: rgba(0, 0, 0, 0.87);
+}
+.github-skillset {
+  font-family: "Quattrocento Sans" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* or 150% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.44px;
+
+  /* Gray 2 */
+
+  color: #4f4f4f;
+}
+.dev-dash-title {
+  font-family: "Quattrocento Sans" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+  /* identical to box height, or 140% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+
+  /* Dark Color */
+
+  color: rgba(0, 0, 0, 0.87);
+}
+.dev-dash-subtitle {
+  font-family: "Quattrocento Sans" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.44px;
+
+  /* Gray 2 */
 
   color: #4f4f4f;
 }
