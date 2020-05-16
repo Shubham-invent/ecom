@@ -1,38 +1,163 @@
-.App {
-  text-align: center;
-}
+.login-title {
+  position: absolute;
+  width: 94px;
+  height: 25px;
+  left: calc(50% - 94px / 2);
+  top: calc(50% - 25px / 2 + 2.5px);
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+  font-family: 'Righteous' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 25px;
+  /* identical to box height */
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  letter-spacing: 0.01em;
+
+  color: #333333;
 }
 
-.App-link {
-  color: #61dafb;
+.login-other {
+  position: absolute;
+  width: 177px;
+  height: 16px;
+  right: 5px;
+  /* left: calc(50% - 177px / 2 - 45.5px); */
+  top: calc(50% - 16px / 2 + 0.5px);
+  font-family: 'Quattrocento Sans' !important;
+  font-style: normal;
+  font-weight: bold !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  letter-spacing: 0.75px !important;
+  text-transform: uppercase;
+  color: #333333 !important;
+}
+.appbar {
+  height: 62px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-world-text {
+  /* position: absolute;
+  left: 0%;
+  right: 0.56%;
+  top: 0%;
+  bottom: 0%; */
+
+  font-family: 'Quattrocento Sans' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+  /* identical to box height, or 140% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+
+  /* Dark Color */
+
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.login-github-text {
+  font-family: 'Quattrocento Sans' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.44px;
+
+  /* Gray 2 */
+
+  color: #4f4f4f;
+}
+
+.login-search {
+  position: absolute !important;
+  width: 417px;
+  height: 60px;
+  left: 985px;
+  top: 92px;
+
+  background: #ffffff;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05),
+    0px -10px 10px rgba(0, 0, 0, 0.05);
+}
+
+.login-icon {
+  padding-left: 8px !important;
+}
+
+.login-developer-btn {
+  color: #ffffff;
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+
+  background-color: #4f4f4f !important;
+  border-radius: 99px !important;
+}
+
+.login-developer-btn-inactive {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+
+  background-color: #ffffff !important;
+  border: 0.5px solid #828282;
+  box-sizing: border-box;
+  border-radius: 99px !important;
+  margin-left: 30px !important;
+}
+
+.login-selected {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+
+  background-color: #f2f2f2 !important;
+  border-radius: 4px !important;
+}
+
+.login-select {
+  background: #ffffff;
+  opacity: 0.8;
+  text-transform: capitalize;
+  padding-left: 10px;
+  margin-left: 10px;
+  padding: 2px;
+  box-shadow: 0px 4px 8px rgba(8, 35, 48, 0.24);
+  border-radius: 4px;
+}
+
+.login-select-text {
+  text-align: center;
+  font-family: 'Roboto' !important;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+
+  color: #4f4f4f;
 }
